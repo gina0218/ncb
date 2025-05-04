@@ -154,10 +154,35 @@
             margin-bottom: 10px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            html, body {
+                height: auto;
+                overflow: auto;
+            }
+
+            .slider-wrapper {
+                position: relative !important;
+                height: auto !important;
+                z-index: 0 !important;
+            }
+
+            .slider {
+                flex-direction: column;
+                width: 100% !important;
+                height: auto !important;
+                animation: none !important;
+            }
+
+            .slider img {
+                width: 100%;
+                height: auto;
+            }
+
             .login-container {
+                position: static;
+                transform: none;
+                margin: 30px auto;
                 width: 90%;
-                right: 5%;
                 padding: 30px;
             }
 
