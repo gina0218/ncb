@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>個人網上銀行</title>
     <style>
         * {
@@ -15,31 +15,7 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-
-        /* 電腦版樣式 */
-        .desktop-view {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        /* 手機版樣式 */
-        .mobile-view {
-            display: none;
-            width: 100%;
-            height: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .mobile-content {
-            width: 1024px; /* 保持電腦版寬度 */
-            height: 100%;
-            position: relative;
+            overflow: hidden;
         }
 
         .slider-wrapper {
@@ -81,6 +57,8 @@
             align-items: center;
             padding: 15px 20px;
             z-index: 10;
+            position: fixed;
+            width: 100%;
         }
 
         .title {
@@ -91,13 +69,13 @@
 
         .login-container {
             position: absolute;
-            top: 50%;
+            top: 100px;
             right: 10%;
-            transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.95);
             padding: 45px;
             border-radius: 15px;
             width: 450px;
+            margin-bottom: 50px;
         }
 
         .login-title {
@@ -178,209 +156,120 @@
             margin-bottom: 10px;
         }
 
-        /* 媒體查詢 - 手機版 */
-        @media (max-width: 768px) {
-            .desktop-view {
-                display: none;
-            }
-
-            .mobile-view {
-                display: block;
-            }
-
+        @media (max-width: 600px) {
             .slider-wrapper {
-                width: 1024px;
-            }
-
-            .slider {
-                width: 3072px;
-            }
-
-            .slider img {
-                width: 1024px;
-            }
-
-            header {
-                width: 1024px;
+                position: absolute;
+                width: 300vw;
+                height: 100vh;
             }
 
             .login-container {
-                right: 50px;
+                position: relative;
+                width: 80%;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 30px;
+                margin-top: 80px;
+                margin-bottom: 50px;
+            }
+
+            .login-title {
+                font-size: 22px;
+            }
+
+            body {
+                overflow-y: auto;
+                height: auto;
+                min-height: 100vh;
             }
         }
     </style>
 </head>
 <body>
-<!-- 電腦版視圖 -->
-<div class="desktop-view">
-    <!-- 背景輪播 -->
-    <div class="slider-wrapper">
-        <div class="slider">
-            <img src="2.png" alt="bg1" />
-            <img src="3.png" alt="bg2" />
-            <img src="4.png" alt="bg3" />
-        </div>
-    </div>
-
-    <!-- 標頭區 -->
-    <header>
-        <img src="1.png" height="38" width="274" alt="logo" />
-        <div class="title">| 個人網上銀行</div>
-    </header>
-
-    <!-- 登入介面 -->
-    <div class="login-container">
-        <div class="login-title">登入個人網上銀行</div>
-
-        <div class="input-group">
-            <img src="5.png" alt="user-icon" />
-            <input type="text" id="username" placeholder="網上銀行號碼/用戶名稱" oninput="checkUsername()" onkeyup="handleUsernameKey(event)" />
-        </div>
-        <div id="user-error" class="error" style="display:none;">無效輸入，請輸入英文及數字</div>
-
-        <div class="input-group">
-            <img src="6.png" alt="password-icon" />
-            <input type="password" id="password" placeholder="登入密碼" />
-        </div>
-
-        <div class="captcha-group">
-            <img src="7.png" alt="captcha-icon" />
-            <input type="text" class="captcha-input" id="captcha-input" placeholder="驗證碼" oninput="checkCaptcha()" />
-            <div class="captcha-img" id="captchaBox" onclick="generateCaptcha()"></div>
-        </div>
-        <div id="captcha-error" class="error" style="display:none;">輸入錯誤，請重新載入驗證碼</div>
-
-        <button class="login-btn" onclick="validateForm()">登入</button>
+<!-- 背景輪播 -->
+<div class="slider-wrapper">
+    <div class="slider">
+        <img src="2.png" alt="bg1" />
+        <img src="3.png" alt="bg2" />
+        <img src="4.png" alt="bg3" />
     </div>
 </div>
 
-<!-- 手機版視圖 -->
-<div class="mobile-view">
-    <div class="mobile-content">
-        <!-- 背景輪播 -->
-        <div class="slider-wrapper">
-            <div class="slider">
-                <img src="2.png" alt="bg1" />
-                <img src="3.png" alt="bg2" />
-                <img src="4.png" alt="bg3" />
-            </div>
-        </div>
+<!-- 標頭區 -->
+<header>
+    <img src="1.png" height="38" width="274" alt="logo" />
+    <div class="title">| 個人網上銀行</div>
+</header>
 
-        <!-- 標頭區 -->
-        <header>
-            <img src="1.png" height="38" width="274" alt="logo" />
-            <div class="title">| 個人網上銀行</div>
-        </header>
+<!-- 登入介面 -->
+<div class="login-container">
+    <div class="login-title">登入個人網上銀行</div>
 
-        <!-- 登入介面 -->
-        <div class="login-container">
-            <div class="login-title">登入個人網上銀行</div>
-
-            <div class="input-group">
-                <img src="5.png" alt="user-icon" />
-                <input type="text" id="mobile-username" placeholder="網上銀行號碼/用戶名稱" oninput="checkUsername('mobile')" onkeyup="handleUsernameKey(event, 'mobile')" />
-            </div>
-            <div id="mobile-user-error" class="error" style="display:none;">無效輸入，請輸入英文及數字</div>
-
-            <div class="input-group">
-                <img src="6.png" alt="password-icon" />
-                <input type="password" id="mobile-password" placeholder="登入密碼" />
-            </div>
-
-            <div class="captcha-group">
-                <img src="7.png" alt="captcha-icon" />
-                <input type="text" class="captcha-input" id="mobile-captcha-input" placeholder="驗證碼" oninput="checkCaptcha('mobile')" />
-                <div class="captcha-img" id="mobile-captchaBox" onclick="generateCaptcha('mobile')"></div>
-            </div>
-            <div id="mobile-captcha-error" class="error" style="display:none;">輸入錯誤，請重新載入驗證碼</div>
-
-            <button class="login-btn" onclick="validateForm('mobile')">登入</button>
-        </div>
+    <div class="input-group">
+        <img src="5.png" alt="user-icon" />
+        <input type="text" id="username" placeholder="網上銀行號碼/用戶名稱" oninput="checkUsername()" onkeyup="handleUsernameKey(event)" />
     </div>
+    <div id="user-error" class="error" style="display:none;">無效輸入，請輸入英文及數字</div>
+
+    <div class="input-group">
+        <img src="6.png" alt="password-icon" />
+        <input type="password" id="password" placeholder="登入密碼" />
+    </div>
+
+    <div class="captcha-group">
+        <img src="7.png" alt="captcha-icon" />
+        <input type="text" class="captcha-input" id="captcha-input" placeholder="驗證碼" oninput="checkCaptcha()" />
+        <div class="captcha-img" id="captchaBox" onclick="generateCaptcha()"></div>
+    </div>
+    <div id="captcha-error" class="error" style="display:none;">輸入錯誤，請重新載入驗證碼</div>
+
+    <button class="login-btn" onclick="validateForm()">登入</button>
 </div>
 
 <script>
     let currentCaptcha = "";
-    let mobileCurrentCaptcha = "";
 
-    function generateCaptcha(platform = 'desktop') {
+    function generateCaptcha() {
         const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        let captcha = '';
+        currentCaptcha = '';
         for (let i = 0; i < 4; i++) {
-            captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
         }
-
-        if (platform === 'mobile') {
-            mobileCurrentCaptcha = captcha;
-            document.getElementById('mobile-captchaBox').innerText = mobileCurrentCaptcha;
-        } else {
-            currentCaptcha = captcha;
-            document.getElementById('captchaBox').innerText = currentCaptcha;
-        }
+        document.getElementById('captchaBox').innerText = currentCaptcha;
     }
 
     function containsChinese(str) {
         return /[\u4e00-\u9fa5]/.test(str);
     }
 
-    function checkUsername(platform = 'desktop') {
-        const username = platform === 'mobile'
-            ? document.getElementById('mobile-username').value
-            : document.getElementById('username').value;
-
-        const userError = platform === 'mobile'
-            ? document.getElementById('mobile-user-error')
-            : document.getElementById('user-error');
-
+    function checkUsername() {
+        const username = document.getElementById('username').value;
+        const userError = document.getElementById('user-error');
         userError.style.display = containsChinese(username) ? 'block' : 'none';
     }
 
-    function checkCaptcha(platform = 'desktop') {
-        const captchaInput = platform === 'mobile'
-            ? document.getElementById('mobile-captcha-input').value.toUpperCase()
-            : document.getElementById('captcha-input').value.toUpperCase();
-
-        const captchaError = platform === 'mobile'
-            ? document.getElementById('mobile-captcha-error')
-            : document.getElementById('captcha-error');
-
-        const correctCaptcha = platform === 'mobile' ? mobileCurrentCaptcha : currentCaptcha;
-
+    function checkCaptcha() {
+        const captchaInput = document.getElementById('captcha-input').value.toUpperCase();
+        const captchaError = document.getElementById('captcha-error');
         if (captchaInput.length === 4) {
-            captchaError.style.display = (captchaInput !== correctCaptcha) ? 'block' : 'none';
+            captchaError.style.display = (captchaInput !== currentCaptcha) ? 'block' : 'none';
         } else {
             captchaError.style.display = 'none';
         }
     }
 
-    function handleUsernameKey(e, platform = 'desktop') {
+    function handleUsernameKey(e) {
         if (e.key === 'Enter') {
-            if (platform === 'mobile') {
-                document.getElementById('mobile-password').focus();
-            } else {
-                document.getElementById('password').focus();
-            }
+            document.getElementById('password').focus();
         }
     }
 
-    function validateForm(platform = 'desktop') {
-        const username = platform === 'mobile'
-            ? document.getElementById('mobile-username').value
-            : document.getElementById('username').value;
-
-        const captchaInput = platform === 'mobile'
-            ? document.getElementById('mobile-captcha-input').value.toUpperCase()
-            : document.getElementById('captcha-input').value.toUpperCase();
-
-        const correctCaptcha = platform === 'mobile' ? mobileCurrentCaptcha : currentCaptcha;
-
-        const userError = platform === 'mobile'
-            ? document.getElementById('mobile-user-error')
-            : document.getElementById('user-error');
-
-        const captchaError = platform === 'mobile'
-            ? document.getElementById('mobile-captcha-error')
-            : document.getElementById('captcha-error');
+    function validateForm() {
+        const username = document.getElementById('username').value;
+        const captchaInput = document.getElementById('captcha-input').value.toUpperCase();
+        const userError = document.getElementById('user-error');
+        const captchaError = document.getElementById('captcha-error');
 
         let valid = true;
 
@@ -389,7 +278,7 @@
             valid = false;
         }
 
-        if (captchaInput !== correctCaptcha) {
+        if (captchaInput !== currentCaptcha) {
             captchaError.style.display = 'block';
             valid = false;
         }
@@ -399,10 +288,7 @@
         }
     }
 
-    window.onload = function() {
-        generateCaptcha('desktop');
-        generateCaptcha('mobile');
-    };
+    window.onload = generateCaptcha;
 </script>
 </body>
 </html>
