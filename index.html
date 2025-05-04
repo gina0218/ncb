@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=1024" />
     <title>個人網上銀行</title>
     <style>
         * {
@@ -15,7 +15,8 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow-x: auto; /* ✅ 允許橫向滑動 */
+            overflow-y: hidden; /* ✅ 禁止上下滾動 */
         }
 
         .slider-wrapper {
@@ -154,42 +155,7 @@
             margin-bottom: 10px;
         }
 
-        @media (max-width: 768px) {
-            html, body {
-                height: auto;
-                overflow: auto;
-            }
-
-            .slider-wrapper {
-                position: relative !important;
-                height: auto !important;
-                z-index: 0 !important;
-            }
-
-            .slider {
-                flex-direction: column;
-                width: 100% !important;
-                height: auto !important;
-                animation: none !important;
-            }
-
-            .slider img {
-                width: 100%;
-                height: auto;
-            }
-
-            .login-container {
-                position: static;
-                transform: none;
-                margin: 30px auto;
-                width: 90%;
-                padding: 30px;
-            }
-
-            .login-title {
-                font-size: 22px;
-            }
-        }
+        /* ✅ 刪除所有 @media 響應式設計 */
     </style>
 </head>
 <body>
