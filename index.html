@@ -156,32 +156,61 @@
             margin-bottom: 10px;
         }
 
+        /* 手機版 RWD 優化 */
         @media (max-width: 600px) {
+            html, body {
+                overflow-y: auto;
+                height: auto;
+            }
+
             .slider-wrapper {
-                position: absolute;
-                width: 300vw;
+                width: 100vw;
                 height: 100vh;
+            }
+
+            .slider {
+                width: 300vw;
             }
 
             .login-container {
                 position: relative;
-                width: 80%;
+                width: 90%;
                 right: auto;
                 left: 50%;
                 transform: translateX(-50%);
-                padding: 30px;
-                margin-top: 80px;
+                padding: 25px 20px;
+                margin-top: 100px;
                 margin-bottom: 50px;
+                border-radius: 12px;
             }
 
             .login-title {
-                font-size: 22px;
+                font-size: 20px;
+                text-align: center;
             }
 
-            body {
-                overflow-y: auto;
-                height: auto;
-                min-height: 100vh;
+            .input-group,
+            .captcha-group {
+                padding: 5px 8px;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            .captcha-input {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .captcha-img {
+                font-size: 18px;
+                width: 80px;
+                height: 36px;
+                line-height: 36px;
+            }
+
+            .login-btn {
+                font-size: 16px;
+                padding: 10px;
             }
         }
     </style>
